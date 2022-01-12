@@ -3,7 +3,7 @@ package com.nnk.springboot.service.impl;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.exception.IdRequestUnknown;
 import com.nnk.springboot.repositories.BidListRepository;
-import com.nnk.springboot.service.IBidListService;
+import com.nnk.springboot.service.ICrudOperations;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -15,43 +15,45 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 @Log4j2
-public class BidListService implements IBidListService {
+public class BidListService implements ICrudOperations<BidList> {
 
     private BidListRepository bidListRepository;
 
-    @Override
     @Transactional
-    public BidList saveBid(BidList bidList) {
-        log.info("saveBid called, parameter -> bid:" + bidList);
-        return bidListRepository.save(bidList);
+    @Override
+    public BidList saveModel(BidList model) {
+        log.info("saveModel(BidList) called, parameter -> bid:" + model);
+        return bidListRepository.save(model);
     }
 
     @Override
-    public BidList getBid(int id) throws IdRequestUnknown {
-        log.info("getBid called, parameter -> id:" + id);
+    public BidList getModel(int id) throws IdRequestUnknown {
+        log.info("getModel(BidList) called, parameter -> id:" + id);
         return bidListRepository.findById(id)
-                .orElseThrow(() -> new IdRequestUnknown("id bid unknown"));
+                .orElseThrow(() -> new IdRequestUnknown("id bidList unknown"));
     }
 
     @Override
-    public List<BidList> getAllBids() {
-        log.info("getAllBids called, parameter -> none");
+    public List<BidList> getAllModels() {
+        log.info("getAllModels(BidList) called, parameter -> none");
         return bidListRepository.findAll();
     }
 
-    @Override
     @Transactional
-    public BidList updateBid(int id, BidList bidList) throws IdRequestUnknown {
-        log.info("updateBid called, parameter -> id:" + id + " bid:" + bidList);
+    @Override
+    public BidList updateModel(int id, BidList model) throws IdRequestUnknown {
+        log.info("updateModel(BidList) called, parameter -> id:" + id + " bid" +
+                ":" + model);
         Optional<BidList> currentBid = bidListRepository.findById(id);
         if (currentBid.isPresent()) {
-            return saveBid(bidList);
+            return saveModel(model);
         }
         return null;
     }
 
     @Override
-    public void deleteBid(int id) {
+    public void deleteModel(int id) {
+        log.info("deleteModel(BidList) called, parameter -> id:" + id);
         bidListRepository.deleteById(id);
     }
 }

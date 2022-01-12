@@ -2,7 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.exception.IdRequestUnknown;
-import com.nnk.springboot.service.IBidListService;
+import com.nnk.springboot.service.ICrudOperations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +20,12 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class BidListController {
 
-    private final IBidListService bidListService;
+    private final ICrudOperations<BidList> bidListService;
 
     @RequestMapping("/bidList/list")
     public String home(Model model)
     {
-        model.addAttribute("allBids", bidListService.getAllBids());
+        model.addAttribute("allBids", bidListService.getAllModels());
         return "bidList/list";
     }
 
@@ -40,7 +40,7 @@ public class BidListController {
         if (result.hasErrors()) {
             return "bidList/add";
         }
-        bidListService.saveBid(bidList);
+        bidListService.saveModel(bidList);
         redirectAttributes.addFlashAttribute("savedOk", "ok");
         return "redirect:/bidList/list";
     }
@@ -49,7 +49,7 @@ public class BidListController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model,
                                  RedirectAttributes redirectAttributes) {
         try {
-            model.addAttribute("bidList", bidListService.getBid(id));
+            model.addAttribute("bidList", bidListService.getModel(id));
         } catch (IdRequestUnknown e) {
             redirectAttributes.addFlashAttribute("idUnknown", "unknown");
             return "redirect:/bidList/list";
@@ -59,19 +59,23 @@ public class BidListController {
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
-                             BindingResult result) {
+                             BindingResult result, RedirectAttributes redirectAttributes) {
         bidList.setBidListId(id);
         if (result.hasErrors()) {
             return "bidList/update";
         }
-        bidListService.saveBid(bidList);
+        try {
+            bidListService.updateModel(id, bidList);
+        } catch (IdRequestUnknown e) {
+            redirectAttributes.addFlashAttribute("idUnknown", "unknown");
+        }
         return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id,
                             RedirectAttributes redirectAttributes) {
-        bidListService.deleteBid(id);
+        bidListService.deleteModel(id);
         redirectAttributes.addFlashAttribute("delete", "ok");
         return "redirect:/bidList/list";
     }
