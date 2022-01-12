@@ -55,7 +55,7 @@ public class CurvePointService implements ICrudOperations<CurvePoint> {
 
     @Override
     public void deleteModel(int id) {
-        log.info("deleteModel(CurvePoin) called, parameter -> id:" + id);
+        log.info("deleteModel(CurvePoint) called, parameter -> id:" + id);
         curvePointRepository.deleteById(id);
     }
 }

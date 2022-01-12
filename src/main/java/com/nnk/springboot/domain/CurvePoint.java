@@ -19,7 +19,6 @@ import java.sql.Timestamp;
 @Table(name = "curvepoint")
 public class CurvePoint {
 
-
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
