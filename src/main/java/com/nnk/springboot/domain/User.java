@@ -20,9 +20,9 @@ public class User {
 
     @Size(max = 50, message = "max 50 characters")
     @NotBlank(message = "Username is mandatory")
-    private String username;
+    @Column(name = "user_name")
+    private String userName;
 
-    @Size(max = 50, message = "max 50 characters")
     @NotBlank(message = "Password is mandatory")
     private String password;
 

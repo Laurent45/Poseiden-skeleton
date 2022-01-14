@@ -17,31 +17,25 @@
 		<form action="#" th:action="@{/curvePoint/validate}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
 
 			<div class="form-group">
-				<label for="curveId">Curve Id</label>
-				<div>
-					<input id="curveId" placeholder="Curve Id" type="number" th:field="*{curveId}">
+				<label for="curveId" class="col-sm-2 control-label">Curve Id</label>
+				<div class="col-sm-10">
+					<input type="curveId" th:field="*{curveId}" id="curveId" placeholder="Curve Id" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('curveId')}" th:errors="*{curveId}"></p>
 				</div>
-				<div class="text-danger" th:if="${#fields.hasErrors('curveId')}" th:errors="*{curveId}"></div>
 			</div>
+			
 			<div class="form-group">
-				<label for="term">Term</label>
-				<div>
-					<input id="term" placeholder="Term" type="number" step="0.01" th:field="*{term}">
+				<label for="value" class="col-sm-2 control-label">Value</label>
+				<div class="col-sm-10">
+					<input type="value" th:field="*{value}" id="value" placeholder="Value" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></p>
 				</div>
-				<div class="text-danger" th:if="${#fields.hasErrors('term')}" th:errors="*{term}"></div>
-			</div>
-			<div class="form-group">
-				<label for="Value">Value</label>
-				<div>
-					<input id="Value" placeholder="Value" type="number" step="0.01" th:field="*{value}">
-				</div>
-				<div class="text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></div>
 			</div>
 
 			<div class="form-group">
-				<div>
-					<a class="btn btn-danger" href="/curvePoint/list">Cancel</a>
-					<input value="Add curve point" class="btn btn-primary" type="submit">
+				<div class="col-sm-12">
+					<a class="btn btn-danger btn-sm" href="/curvePoint/list">Cancel</a>
+					<input class="btn btn-primary btn-sm" type="submit" value="Add curve point">
 				</div>
 			</div>
 
