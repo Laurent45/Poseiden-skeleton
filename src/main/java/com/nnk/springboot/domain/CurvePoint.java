@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.sql.Timestamp;
 
 
@@ -16,7 +13,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "curvepoint")
+@Table(name = "CurvePoint")
 public class CurvePoint {
 
     @Id
@@ -25,6 +22,7 @@ public class CurvePoint {
     private Integer id;
 
     @NotNull(message = "curve id is mandatory")
+    @PositiveOrZero(message = "curve id must be positive or zero")
     @Column(name = "curve_id")
     private Integer curveId;
 

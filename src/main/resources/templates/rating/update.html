@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org"
+	  lang="en">
 <head>
 	<meta charset="utf-8"/>
 	<title>Home</title>
-	<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+	<link rel="stylesheet" href="../../static/css/bootstrap.min.css" >
 </head>
 <body>
 <div class="container">
@@ -26,14 +27,14 @@
 			<div class="form-group">
 				<label for="sandPRating">Sand p rating</label>
 				<div>
-					<input id="sandPRating" placeholder="Sand P Rating" type="text" step="0.01" th:field="*{sandPRating}">
+					<input id="sandPRating" placeholder="Sand P Rating" type="text" th:field="*{sandPRating}">
 				</div>
 				<div class="text-danger" th:if="${#fields.hasErrors('sandPRating')}" th:errors="*{sandPRating}"></div>
 			</div>
 			<div class="form-group">
 				<label for="fitchRating">Fitch rating</label>
 				<div>
-					<input id="fitchRating" placeholder="Fitch Rating" type="text" step="0.01" th:field="*{fitchRating}">
+					<input id="fitchRating" placeholder="Fitch Rating" type="text" th:field="*{fitchRating}">
 				</div>
 				<div class="text-danger" th:if="${#fields.hasErrors('fitchRating')}" th:errors="*{fitchRating}"></div>
 			</div>

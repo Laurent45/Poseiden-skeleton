@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org"
+	  lang="en">
 <head>
 <meta charset="utf-8"/>
 <title>Home</title>
@@ -16,6 +17,17 @@
 			<a href="/">Home</a>&nbsp;|&nbsp;<a href="/login">Login</a>
 		</div>
 	</div>
+
+	<div th:if="${!#strings.isEmpty(savedOk)}" class="alert alert-success" role="alert" auto-close="3000">
+		<strong>Success</strong> ! The user has been saved.
+	</div>
+	<div th:if="${!#strings.isEmpty(idUnknown)}" class="alert alert-danger" role="alert" auto-close="3000">
+		This id's user is unknown.
+	</div>
+	<div th:if="${!#strings.isEmpty(delete)}" class="alert alert-success" role="alert" auto-close="3000">
+		Delete has been done.
+	</div>
+
 	<div class="row"><h2>User List</h2></div>
 	<div class="row">
 		<a href="/user/add" class="btn btn-primary btn-sm">Add New</a>
@@ -44,5 +56,21 @@
 		</table>
 	</div>
 </div>
+
+	<script th:src="@{'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'}"></script>
+	<script th:src="@{'https://code.jquery.com/jquery.min.js'}"></script>
+	<script th:src="@{'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'}"></script>
+	<script>
+		$(function () {
+			var alert = $('div.alert[auto-close]');
+			alert.each(function () {
+				var that = $(this);
+				var time_period = that.attr('auto-close');
+				setTimeout(function () {
+					that.alert('close');
+				}, time_period);
+			});
+		});
+	</script>
 </body>
 </html>
