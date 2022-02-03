@@ -24,6 +24,7 @@ public class TradeTests {
 		Trade trade = new Trade();
 		trade.setAccount("Trade Account");
 		trade.setType("Type");
+		trade.setBuyQuantity(1D);
 
 		// Save
 		trade = tradeRepository.save(trade);

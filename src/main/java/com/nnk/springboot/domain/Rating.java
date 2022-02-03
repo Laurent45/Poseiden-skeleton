@@ -1,5 +1,6 @@
 package com.nnk.springboot.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Getter
+@EqualsAndHashCode
 @Setter
 @NoArgsConstructor
 @Table(name = "rating")

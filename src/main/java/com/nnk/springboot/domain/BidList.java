@@ -1,21 +1,27 @@
 package com.nnk.springboot.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 @ToString
 @Table(name = "bidlist")
 public class BidList {
+
+    public BidList(Integer bidListId, String account, String type, Double bidQuantity) {
+        this.bidListId = bidListId;
+        this.account = account;
+        this.type = type;
+        this.bidQuantity = bidQuantity;
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

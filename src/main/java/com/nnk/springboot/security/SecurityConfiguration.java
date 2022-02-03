@@ -24,7 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/user/*").hasAuthority("ADMIN")
-                .antMatchers("/", "/app/login").permitAll()
+                .antMatchers("/", "/app/login", "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().accessDeniedPage("/app/error")
@@ -34,6 +34,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .loginPage("/app/login")
                         .loginProcessingUrl("/login")
                         .failureUrl("/app/login?error"))
+                .oauth2Login()
+                .defaultSuccessUrl("/bidList/list")
+                .and()
                 .logout()
                 .logoutSuccessUrl("/app/login?logout")
                 .logoutUrl("/app/logout")

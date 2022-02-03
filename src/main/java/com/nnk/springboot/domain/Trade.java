@@ -1,5 +1,6 @@
 package com.nnk.springboot.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,9 +15,17 @@ import java.sql.Timestamp;
 @Entity
 @Setter
 @Getter
+@EqualsAndHashCode
 @NoArgsConstructor
 @Table(name = "trade")
 public class Trade {
+
+    public Trade(Integer id, String account, String type, Double buyQuantity) {
+        this.id = id;
+        this.account = account;
+        this.type = type;
+        this.buyQuantity = buyQuantity;
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
