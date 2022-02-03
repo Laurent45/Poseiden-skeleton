@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+	  lang="en">
 <head>
 <meta charset="utf-8"/>
 <title>Home</title>
@@ -16,6 +16,7 @@
 				<a th:href="@{/rating/list}">Ratings</a>&nbsp;|&nbsp;
 				<a th:href="@{/trade/list}">Trade</a>&nbsp;|&nbsp;
 				<a th:href="@{/ruleName/list}">Rule</a>
+				<a sec:authorize="hasAuthority('ADMIN')" class="text-danger" th:href="@{/user/list}">User</a>
 			</div>
 		<div class="col-6 text-right">
 			Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
